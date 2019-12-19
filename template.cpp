@@ -96,15 +96,17 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     }
      
     pair<string_view, string_view> _dbg_split(string_view names) {
-        int cnt = 0, pos = 0, q1 = false, q2 = false;
+        int cnt = 0, pos = 0, q1 = false, q2 = false, bs = false;
         for (char c : names) {
-            if (cnt + q1 + q2 == 0 && c == ',') break;
+            if (bs) bs = false;
             else if (q1) { if (c == '\'') q1 = false; }
-            else if (q2) { if (c == '"') q2 = false; }
+            else if (q2) { if (c == '\"') q2 = false; }
+            else if (c == '\\') bs = true;
             else if (c == '\'') q1 = true;
-            else if (c == '"') q2 = true;
-            else if (c == '(' || c == '<' || c == '[') ++cnt;
-            else if (c == ')' || c == '>' || c == ']') --cnt;
+            else if (c == '\"') q2 = true;
+            else if (cnt == 0 && c == ',') break;
+            else if (c == '(' || c == '[') ++cnt;
+            else if (c == ')' || c == ']') --cnt;
             ++pos;
         }
         auto name = names.substr(0, pos);
@@ -125,24 +127,20 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     #define err(...) ((void)42)
 #endif
 
-int run();
+struct __INIT_C{
+    __INIT_C() {
+#ifndef LOCAL
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+#endif // not LOCAL
+        cout << fixed << setprecision(10);
+    }
+} __INIT_I;
+
+//--------------------------------REALIZATION---------------------------------\\
 
 int main() {
-#ifndef LOCAL
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-#endif // LOCAL
-    cout << fixed << setprecision(10);
-    return run();
-}
 
-//-//-//-//-//-//-//-//-//-//-REALIZATION-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\
-
-int run() {
-    int n;
-    cin > n;
-    vector<int> a(n);
-    cin > a;
     return 0;
 }
