@@ -74,6 +74,7 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     string to_string(const char* s) { return to_string(string(s)); }
     string to_string(bool b) { return b ? "true" : "false"; }
     string to_string(std::vector<bool>::reference b) { return to_string(bool(b)); }
+    string to_string(char c) { return "'"s + c + "'"; }
 
     template <size_t N>
     string to_string(bitset<N> b) {
@@ -99,9 +100,9 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
         int cnt = 0, pos = 0, q1 = false, q2 = false, bs = false;
         for (char c : names) {
             if (bs) bs = false;
+            else if (c == '\\') bs = true;
             else if (q1) { if (c == '\'') q1 = false; }
             else if (q2) { if (c == '\"') q2 = false; }
-            else if (c == '\\') bs = true;
             else if (c == '\'') q1 = true;
             else if (c == '\"') q2 = true;
             else if (cnt == 0 && c == ',') break;
@@ -127,7 +128,7 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     #define err(...) ((void)42)
 #endif
 
-struct __INIT_C{
+struct __INIT_C {
     __INIT_C() {
 #ifndef LOCAL
         ios_base::sync_with_stdio(0);
