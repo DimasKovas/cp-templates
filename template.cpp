@@ -73,12 +73,14 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     string to_string(bool b) { return b ? "true" : "false"; }
     string to_string(std::vector<bool>::reference b) { return to_string(bool(b)); }
     string to_string(char c) { return "'"s + c + "'"; }
+
     template <size_t N>
     string to_string(bitset<N> b) {
         stringstream s;
         s << b;
         return s.str();
     }
+
     // Container's functions should have forward declarations to allow nesting.
     template <typename T> string to_string(T v);
     template <typename T1, typename T2> string to_string(const pair<T1, T2>& p);
