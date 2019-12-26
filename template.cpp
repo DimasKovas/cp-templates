@@ -68,20 +68,23 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
 #ifdef LOCAL
     #define err(...) cerr << "Line " << __LINE__ << ": ", _dbg(#__VA_ARGS__, __VA_ARGS__), cerr << endl
 
-    template <typename T1, typename T2>
-    string to_string(const pair<T1, T2>& p) { return "{" + to_string(p.first) + ", " + to_string(p.second) + "}"; }
     string to_string(const string& s) { return '"' + s + '"'; }
     string to_string(const char* s) { return to_string(string(s)); }
     string to_string(bool b) { return b ? "true" : "false"; }
     string to_string(std::vector<bool>::reference b) { return to_string(bool(b)); }
     string to_string(char c) { return "'"s + c + "'"; }
-
     template <size_t N>
     string to_string(bitset<N> b) {
         stringstream s;
         s << b;
         return s.str();
     }
+    // Container's functions should have forward declarations to allow nesting.
+    template <typename T> string to_string(T v);
+    template <typename T1, typename T2> string to_string(const pair<T1, T2>& p);
+
+    template <typename T1, typename T2>
+    string to_string(const pair<T1, T2>& p) { return "{" + to_string(p.first) + ", " + to_string(p.second) + "}"; }
 
     template <typename T>
     string to_string(T v) {
