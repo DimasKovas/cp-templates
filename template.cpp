@@ -10,7 +10,9 @@ using namespace std;
 #define pb push_back
 
 #define fr first
+#define x first
 #define sc second
+#define y second
 
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
@@ -24,46 +26,49 @@ using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 using ld = double;
+using uint = unsigned int;
+
+#define t1 template <typename T>
+#define t2 template <typename T1, typename T2>
+
+// define instead of using saves deduction guides.
+#define pa pair
+#define ve vector
+using pi = pa<int, int>;
+using pll = pa<ll, ll>;
+using vi = ve<int>;
+using vvi = ve<ve<int>>;
+using vll = ve<ll>;
+using vvll = ve<ve<ll>>;
 
 const ld Pi = acosl(-1.0);
 const ll OO = (ll)1e+18 + 100;
 const int oo = (int)1e+9 + 100;
 
-template<typename T, T Def>
-T makeVec() { return Def; }
+#define op(x) auto operator x(auto a, auto b) { return pa{a.fr x b.fr, a.sc x b.sc}; }
+op(+) op(-) op(*) op(/) op(%) op(^) op(&) op(|)
+#undef op
 
-template<typename T, T Def = T(), typename ...Args>
-auto makeVec(int sz, Args ...ar) { return vector(sz, makeVec<T, Def>(ar...)); }
+#define op(x) auto& operator x(auto& a, auto b) { return a.fr x b.fr, a.sc x b.sc, a; }
+op(+=) op(-=) op(*=) op(/=) op(%=) op(^=) op(&=) op(|=)
+#undef op
 
-template <typename T>
-inline ostream &operator<<(ostream &out, const vector<T> &v) {
-  for (const auto &it : v) out << it << ' ';
-  return out;
+t1 inline ostream &operator<<(ostream &out, const ve<T> &v) {
+    for (const auto &it : v) out << it << ' ';
+    return out;
 }
 
-template <typename T>
-inline istream &operator>>(istream &in, vector<T> &v) {
-  for (auto &it : v) in >> it;
-  return in;
+t1 inline istream &operator>>(istream &in, ve<T> &v) {
+    for (auto &it : v) in >> it;
+    return in;
 }
 
-template <typename T1, typename T2>
-inline ostream &operator<<(ostream &out, const pair <T1, T2> &p) { return out << p.first << ' ' << p.second << ' '; }
-
-template <typename T1, typename T2>
-inline istream &operator>>(istream &in, pair <T1, T2> &p) { return in >> p.first >> p.second; }
-
-template <typename T>
-inline istream &operator>(istream &in, T &p) { return in >> p; }
-
-template <typename T>
-inline ostream &operator<(ostream &out, const T &p) { return out << p; }
-
-template <typename T1, typename T2>
-inline bool umin(T1 &a, const T2 &b) { return a > b ? a = b, 1 : 0; }
- 
-template <typename T1, typename T2>
-inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
+t2 inline ostream &operator<<(ostream &out, const pa<T1, T2> &p) { return out << p.fr << ' ' << p.sc << ' '; }
+t2 inline istream &operator>>(istream &in, pa<T1, T2> &p) { return in >> p.fr >> p.sc; }
+t1 inline istream &operator>(istream &in, T &p) { return in >> p; }
+t1 inline ostream &operator<(ostream &out, const T &p) { return out << p; }
+t2 inline bool umin(T1 &a, const T2 &b) { return a > b ? a = b, 1 : 0; }
+t2 inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
 
 #ifdef LOCAL
     #define err(...) cerr << "Line " << __LINE__ << ": ", _dbg(#__VA_ARGS__, __VA_ARGS__), cerr << endl
@@ -82,14 +87,12 @@ inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     }
 
     // Container's functions should have forward declarations to allow nesting.
-    template <typename T> string to_string(T v);
-    template <typename T1, typename T2> string to_string(const pair<T1, T2>& p);
+    t1 string to_string(T v);
+    t2 string to_string(const pair<T1, T2>& p);
 
-    template <typename T1, typename T2>
-    string to_string(const pair<T1, T2>& p) { return "{" + to_string(p.first) + ", " + to_string(p.second) + "}"; }
+    t2 string to_string(const pair<T1, T2>& p) { return "{" + to_string(p.first) + ", " + to_string(p.second) + "}"; }
 
-    template <typename T>
-    string to_string(T v) {
+    t1 string to_string(T v) {
         bool first = true;
         string res = "[";
         for (const auto &x : v) {
@@ -143,6 +146,9 @@ struct __INIT_C {
         cout << fixed << setprecision(10);
     }
 } __INIT_I;
+
+#undef t1
+#undef t2
 
 //--------------------------------REALIZATION---------------------------------\\
 
