@@ -10,9 +10,7 @@ using namespace std;
 #define pb push_back
 
 #define fr first
-#define x first
 #define sc second
-#define y second
 
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
@@ -30,6 +28,7 @@ using uint = unsigned int;
 
 #define t1 template <typename T>
 #define t2 template <typename T1, typename T2>
+#define t4 template <typename T1, typename T2, typename T3, typename T4>
 
 // define instead of using saves deduction guides.
 #define pa pair
@@ -37,19 +36,25 @@ using uint = unsigned int;
 using pi = pa<int, int>;
 using pll = pa<ll, ll>;
 using vi = ve<int>;
-using vvi = ve<ve<int>>;
+using vvi = ve<vi>;
 using vll = ve<ll>;
-using vvll = ve<ve<ll>>;
+using vvll = ve<vll>;
+using vpi = ve<pi>;
+using vvpi = ve<vpi>;
+using vpll = ve<pll>;
+using vvpll = ve<vpll>;
 
 const ld Pi = acosl(-1.0);
 const ll OO = (ll)1e+18 + 100;
 const int oo = (int)1e+9 + 100;
 
-#define op(x) auto operator x(auto a, auto b) { return pa{a.fr x b.fr, a.sc x b.sc}; }
+#define op(x) t4 auto operator x(const pa<T1,T2>& a, const pa<T3,T4>& b)\
+{ return pa{a.fr x b.fr, a.sc x b.sc}; }
 op(+) op(-) op(*) op(/) op(%) op(^) op(&) op(|)
 #undef op
 
-#define op(x) auto& operator x(auto& a, auto b) { return a.fr x b.fr, a.sc x b.sc, a; }
+#define op(x) t4 auto& operator x(pa<T1,T2>& a, const pa<T3,T4>& b)\
+{ return a.fr x b.fr, a.sc x b.sc, a; }
 op(+=) op(-=) op(*=) op(/=) op(%=) op(^=) op(&=) op(|=)
 #undef op
 
@@ -114,8 +119,8 @@ t2 inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
             else if (c == '\'') q1 = true;
             else if (c == '\"') q2 = true;
             else if (cnt == 0 && c == ',') break;
-            else if (c == '(' || c == '[') ++cnt;
-            else if (c == ')' || c == ']') --cnt;
+            else if (c == '(' || c == '[' || c == '{') ++cnt;
+            else if (c == ')' || c == ']' || c == '}') --cnt;
             ++pos;
         }
         auto name = names.substr(0, pos);
@@ -149,6 +154,7 @@ struct __INIT_C {
 
 #undef t1
 #undef t2
+#undef t4
 
 //--------------------------------REALIZATION---------------------------------\\
 
