@@ -15,11 +15,9 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 
-#define next _reserved_0
-#define prev _reserved_1
-#define y0   _reserved_2
-#define y1   _reserved_3
-#define fpos _reserved_4
+#define y0   _reserved_0
+#define y1   _reserved_1
+#define fpos _reserved_2
 
 using ll = long long;
 using ull = unsigned long long;
@@ -48,15 +46,8 @@ const ld Pi = acosl(-1.0);
 const ll OO = (ll)1e+18 + 100;
 const int oo = (int)1e+9 + 100;
 
-#define op(x) t4 auto operator x(const pa<T1,T2>& a, const pa<T3,T4>& b)\
-{ return pa{a.fr x b.fr, a.sc x b.sc}; }
-op(+) op(-) op(*) op(/) op(%) op(^) op(&) op(|)
-#undef op
-
-#define op(x) t4 auto& operator x(pa<T1,T2>& a, const pa<T3,T4>& b)\
-{ return a.fr x b.fr, a.sc x b.sc, a; }
-op(+=) op(-=) op(*=) op(/=) op(%=) op(^=) op(&=) op(|=)
-#undef op
+random_device rnd_device;
+mt19937 rnd(rnd_device());
 
 t1 inline ostream &operator<<(ostream &out, const ve<T> &v) {
     for (const auto &it : v) out << it << ' ';
@@ -134,7 +125,12 @@ t2 inline bool umax(T1 &a, const T2 &b) { return a < b ? a = b, 1 : 0; }
     template <typename T1, typename ...T2>
     void _dbg(string_view names, const T1 &a, const T2& ...ar) {
         auto [name, rnames] = _dbg_split(names);
-        cerr << name << " = " << to_string(a) << "; ";
+        auto val = to_string(a);
+        if (val == name) { // constant
+            cerr << val << "; ";
+        } else {
+            cerr << name << " = " << to_string(a) << "; ";
+        }
         _dbg(rnames, ar...);
     }
 #else
